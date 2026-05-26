@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Compétences - Awa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B8B;
+            --secondary: #6A5ACD;
+            --accent: #20B2AA;
+            --neutral-light: #FDF6FA;
+            --neutral-dark: #2D2B42;
+            --neutral-medium: #8A7F9B;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-dark);
+            background-color: var(--neutral-light);
+            padding-top: 80px; /* Pour compenser la navbar fixe */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header et Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--neutral-dark);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--neutral-dark);
+            transition: var(--transition);
+        }
+
+        /* Styles spécifiques à la page compétences */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--neutral-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Navigation des catégories */
+        .skills-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .skill-category-btn {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-category-btn:hover,
+        .skill-category-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Grille des compétences */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .skill-category {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .skill-category.active {
+            display: block;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .skill-title h3 {
+            color: var(--neutral-dark);
+            margin-bottom: 5px;
+        }
+
+        .skill-title p {
+            color: var(--neutral-medium);
+            font-size: 0.9rem;
+        }
+
+        /* Barres de progression */
+        .skill-level {
+            margin-top: 20px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--neutral-dark);
+        }
+
+        .skill-percentage {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            transition: width 1.5s ease-in-out;
+            width: 0;
+        }
+
+        /* Soft Skills */
+        .soft-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .soft-skill-item {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .soft-skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .soft-skill-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .soft-skill-item h4 {
+            color: var(--neutral-dark);
+            margin-bottom: 10px;
+        }
+
+        .soft-skill-item p {
+            color: var(--neutral-medium);
+            font-size: 0.9rem;
+        }
+
+        /* Outils et Technologies */
+        .tools-section {
+            margin: 60px 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-item {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .tool-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .tool-item h4 {
+            color: var(--neutral-dark);
+            margin-bottom: 10px;
+        }
+
+        /* Section Certifications */
+        .certifications-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin: 50px 0;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .certification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: var(--neutral-light);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .certification-item:hover {
+            transform: translateX(5px);
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        .certification-icon {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-top: 5px;
+        }
+
+        .certification-content h4 {
+            color: var(--neutral-dark);
+            margin-bottom: 5px;
+        }
+
+        .certification-content p {
+            color: var(--neutral-medium);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .certification-date {
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        /* Section Téléchargement */
+        .download-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-top: 50px;
+        }
+
+        .download-section h3 {
+            color: var(--neutral-dark);
+            margin-bottom: 15px;
+        }
+
+        .download-section p {
+            color: var(--neutral-medium);
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 90, 205, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--neutral-dark) 0%, #1a1a2e 100%);
+            color: white;
+            padding: 80px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-info i {
+            color: var(--accent);
+            width: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fillProgress {
+            from {
+                width: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                text-align: center;
+                gap: 15px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .skill-category-btn {
+                width: 250px;
+                justify-content: center;
+            }
+            
+            .soft-skills-grid,
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    Awa
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="compétences.html" class="active">Compétences</a></li>
+                    <li><a href="veille.html">Veille</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenu principal des compétences -->
+    <div class="container">
+        <section id="competences">
+            <div class="section-title">
+                <h2>Mes Compétences</h2>
+                <p>Découvrez mon expertise technique et mes compétences professionnelles</p>
+            </div>
+
+            <!-- Navigation des catégories -->
+            <div class="skills-nav">
+                <button class="skill-category-btn active" data-category="techniques">
+                    <i class="fas fa-laptop-code"></i>
+                    Techniques
+                </button>
+                <button class="skill-category-btn" data-category="soft-skills">
+                    <i class="fas fa-users"></i>
+                    Soft Skills
+                </button>
+                <button class="skill-category-btn" data-category="outils">
+                    <i class="fas fa-tools"></i>
+                    Outils
+                </button>
+                <button class="skill-category-btn" data-category="certifications">
+                    <i class="fas fa-award"></i>
+                    Certifications
+                </button>
+            </div>
+
+            <!-- Compétences Techniques -->
+            <div class="skill-category active" id="techniques">
+                <div class="skills-grid">
+                    <!-- Développement Frontend -->
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h3>Systèmes et Virtualisation</h3>
+                                <p>Administration et déploiement de serveurs</p>
+                            </div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Windows Serveur/AD</span>
+                                    <span class="skill-percentage">95%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Linux</span>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Virtualisation</span>
+                                    <span class="skill-percentage">88%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Scripting</span>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="85"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Développement Backend -->
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h3>Réseaux & Sécurité</h3>
+                                <p>Interconnexion et sécurisation des flux</p>
+                            </div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Cisco IOS</span>
+                                    <span class="skill-percentage">92%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="92"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Protocoles(TCP/IP,DNS,DHCP)</span>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Pare-feu/VPN</span>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Sécurité WEB(HTTPS/SSL)</span>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bases de données -->
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h3>Supervision et outils</h3>
+                                <p>Maintient en conditions opérationnel</p>
+                            </div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">GLPI</span>
+                                    <span class="skill-percentage">88%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Zabbix</span>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">sauvegardes</span>
+                                    <span class="skill-percentage">82%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="82"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Support utilisateur/Helpdesk</span>
+                                    <span class="skill-percentage">75%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" data-width="75"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="skill-category" id="soft-skills">
+                <div class="soft-skills-grid">
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4>Communication</h4>
+                        <p>Capacité à transmettre clairement des informations techniques à des publics variés</p>
+                    </div>
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h4>Résolution de problèmes</h4>
+                        <p>Analyse et résolution efficace de problèmes complexes</p>
+                    </div>
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Travail d'équipe</h4>
+                        <p>Collaboration efficace dans des environnements multidisciplinaires</p>
+                    </div>
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Créativité</h4>
+                        <p>Approche innovante pour trouver des solutions originales</p>
+                    </div>
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h4>Gestion du temps</h4>
+                        <p>Organisation et priorisation efficace des tâches</p>
+                    </div>
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Leadership</h4>
+                        <p>Animation d'équipes et prise de décisions éclairées</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outils et Technologies -->
+            <div class="skill-category" id="outils">
+                <div class="tools-section">
+                    <h3 class="section-subtitle" style="text-align: center; margin-bottom: 30px;">Outils et Technologies</h3>
+                    <div class="tools-grid">
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fab fa-git-alt"></i>
+                            </div>
+                            <h4>Git</h4>
+                            <p>Versionning de code</p>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fab fa-docker"></i>
+                            </div>
+                            <h4>Docker</h4>
+                            <p>Conteneurisation</p>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fab fa-aws"></i>
+                            </div>
+                            <h4>AWS</h4>
+                            <p>Cloud Computing</p>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fas fa-terminal"></i>
+                            </div>
+                            <h4>CLI</h4>
+                            <p>Ligne de commande</p>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <h4>CI/CD</h4>
+                            <p>Intégration continue</p>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>Responsive</h4>
+                            <p>Design adaptatif</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="skill-category" id="certifications">
+                <div class="certifications-section">
+                    <h3 class="section-subtitle" style="text-align: center; margin-bottom: 30px;">Mes Certifications</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <!-- <div class="certification-icon">
+                                <i class="fab fa-aws"></i>
+                            </div> -->
+                            <!-- <div class="certification-content">
+                                <h4>AWS Certified Developer</h4>
+                                <p>Amazon Web Services</p>
+                                <span class="certification-date">2023</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="certification-content">
+                                <h4>Google Cloud Professional</h4>
+                                <p>Google Cloud Platform</p>
+                                <span class="certification-date">2022</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon">
+                                <i class="fas fa-scroll"></i>
+                            </div>
+                            <div class="certification-content">
+                                <h4>Scrum Master Certified</h4>
+                                <p>Scrum Alliance</p>
+                                <span class="certification-date">2021</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon">
+                                <i class="fab fa-microsoft"></i>
+                            </div>
+                            <div class="certification-content">
+                                <h4>Azure Fundamentals</h4>
+                                <p>Microsoft</p>
+                                <span class="certification-date">2021</span>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Téléchargement -->
+            <div class="download-section">
+                <h3>Télécharger mon CV détaillé</h3>
+                <p>Accédez à une version complète de mes compétences et expériences</p>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Télécharger le CV (PDF)
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="veille.html">Veille Technologique</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <!-- <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            x
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            x
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            x
+                        </li>
+                    </ul> -->
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Disponibilité</h3>
+                    <p>Je suis actuellement disponible pour des missions freelance et des opportunités de collaboration intéressantes.</p>
+                    <a href="contact.html" class="btn" style="margin-top: 15px;">
+                        <i class="fas fa-paper-plane"></i>
+                        Discutons de votre projet
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Awa C. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu hamburger pour mobile
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Fermer le menu en cliquant sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Animation au défilement pour la navbar
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Navigation entre les catégories de compétences
+        document.querySelectorAll('.skill-category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Retirer la classe active de tous les boutons
+                document.querySelectorAll('.skill-category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Ajouter la classe active au bouton cliqué
+                this.classList.add('active');
+                
+                // Masquer toutes les catégories
+                document.querySelectorAll('.skill-category').forEach(category => {
+                    category.classList.remove('active');
+                });
+                
+                // Afficher la catégorie correspondante
+                const categoryId = this.getAttribute('data-category');
+                document.getElementById(categoryId).classList.add('active');
+            });
+        });
+
+        // Animation des barres de progression
+        function animateProgressBars() {
+            document.querySelectorAll('.progress').forEach(progress => {
+                const width = progress.getAttribute('data-width');
+                progress.style.width = width + '%';
+                progress.style.animation = 'fillProgress 1.5s ease-in-out';
+            });
+        }
+
+        // Observer pour animer les barres de progression quand elles deviennent visibles
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateProgressBars();
+                    progressObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observer la section compétences
+        const skillsSection = document.getElementById('competences');
+        progressObserver.observe(skillsSection);
+
+        // Animation du bouton de téléchargement
+        document.querySelector('.download-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Téléchargement...';
+            this.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.style.opacity = '1';
+                alert('CV téléchargé avec succès !');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

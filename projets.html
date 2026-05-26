@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Projets - Awa.C</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B8B;
+            --secondary: #6A5ACD;
+            --accent: #20B2AA; /* Couleur Turquoise */
+            --neutral-light: #FDF6FA;
+            --neutral-dark: #2D2B42;
+            --neutral-medium: #8A7F9B;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-dark);
+            background-color: var(--neutral-light);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header et Navigation --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--neutral-dark);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--neutral-dark);
+            transition: var(--transition);
+        }
+
+        /* --- Styles Projets --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--neutral-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            color: var(--neutral-dark);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .project-content p {
+            color: var(--neutral-medium);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .tech-tag {
+            background-color: var(--neutral-light);
+            color: var(--neutral-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* --- NOUVEAU STYLE BOUTONS TELECHARGEMENT --- */
+        .btn-download {
+            background: linear-gradient(135deg, var(--accent) 0%, #179b95 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(32, 178, 170, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 0.95rem;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(32, 178, 170, 0.5);
+            background: white;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        
+        .btn-download:hover i {
+            animation: bounce 0.5s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-3px); }
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: linear-gradient(135deg, var(--neutral-dark) 0%, #1a1a2e 100%);
+            color: white;
+            padding: 80px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 70px; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                text-align: center;
+                gap: 15px;
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: flex; }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+            .projects-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    Awa
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="projets.html" class="active">Projets</a></li>
+                    <li><a href="compétences.html">Compétences</a></li>
+                    <li><a href="veille.html">Veille</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="projets">
+            <div class="section-title">
+                <h2>Mes Projets</h2>
+                <p>Découvrez mes réalisations et compétences techniques</p>
+            </div>
+            
+            <div class="projects-container">
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-shopping-cart"></i> 
+                    </div>
+                    <div class="project-content">
+                        <h3>Site E-commerce</h3>
+                        <p>Développement d'une application Web E-commerce : Conception et codage d'un site de vente en ligne dynamique. Création de la base de données relationnelle et développement back-end pour la gestion des produits et du panier.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">Développement Web</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/DOC-présentation_revive.pdf" class="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-shield-alt"></i> 
+                    </div>
+                    <div class="project-content">
+                        <h3>Sécurisation HTTPS</h3>
+                        <p>Sécurisation des services web par la mise en place du protocole HTTPS. Création, déploiement et gestion de certificats SSL/TLS pour garantir le chiffrement et l'intégrité des échanges de données.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Sécurité</span>
+                            <span class="tech-tag">HTTPS</span>
+                            <span class="tech-tag">SSL/TLS</span>
+                            <span class="tech-tag">Certificats</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/securisation-https.pdf" class="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-network-wired"></i> 
+                    </div>
+                    <div class="project-content">
+                        <h3>Haute Disponibilité & Load Balancing</h3>
+                        <p>Mise en place d'un Répartiteur de Charge. Configuration d'un cluster Web haute disponibilité avec Nginx. Distribution automatique du trafic entre plusieurs serveurs pour assurer la fluidité du service et la tolérance aux pannes.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Loadbalancing</span>
+                            <span class="tech-tag">Haute Disponibilité</span>
+                            <span class="tech-tag">Nginx</span>
+                            <span class="tech-tag">Tolérance aux pannes</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/DOC-Reverse-Proxy.pdf" class="btn-ss="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-bug"></i> 
+                    </div>
+                    <div class="project-content">
+                        <h3>Analyse de Vulnérabilités</h3>
+                        <p>Déploiement de la solution OpenVAS (Greenbone) pour réaliser des audits de sécurité sur l'infrastructure. Scan des réseaux et serveurs, identification des failles potentielles et proposition de correctifs de sécurité.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Cybersécurité</span>
+                            <span class="tech-tag">OpenVAS</span>
+                            <span class="tech-tag">Audit</span>
+                            <span class="tech-tag">Remédiation</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/openvas-audit.pdf" class="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                     <div class="project-img">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Supervision Zabbix</h3>
+                        <p>Déploiement d'un serveur de monitoring centralisé pour surveiller l'état de santé du parc informatique (Serveurs & Réseaux). Configuration d'alertes en temps réel et création de tableaux de bord pour garantir la continuité de service.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Supervision</span>
+                            <span class="tech-tag">Linux</span>
+                            <span class="tech-tag">SNMP</span>
+                            <span class="tech-tag">Métrologie</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/DOC-Installation-Zabbix.pdf" class="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-project-diagram"></i> 
+                    </div>
+                    <div class="project-content">
+                        <h3>Segmentation par VLAN</h3>
+                        <p>Conception et configuration d'une architecture réseau segmentée par VLANs sur des commutateurs administrables. Isolement des flux (VoIP, Data, Administration) pour optimiser les performances et sécuriser l'infrastructure locale.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Réseau</span>
+                            <span class="tech-tag">VLAN</span>
+                            <span class="tech-tag">Switching</span>
+                            <span class="tech-tag">Sécurité Interne</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/DOC-Segmentation-Vlan.pdf" class="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                         <i class="fas fa-ticket-alt"></i>
+                     </div> 
+                    <div class="project-content">
+                        <h3>Gestion de Parc (GLPI)</h3>
+                        <p>Mise en place d'une solution GLPI. Déploiement d'un outil centralisé pour la gestion du parc informatique et le suivi des incidents (Ticketing). Automatisation de l'inventaire matériel et logiciel via OCS Inventory.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GLPI</span>
+                            <span class="tech-tag">Ticketing</span>
+                            <span class="tech-tag">Helpdesk</span>
+                            <span class="tech-tag">OCS Inventory</span> 
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/DOC-INSTALLATION-GLPI.pdf" class="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-desktop"></i> 
+                    </div>
+                    <div class="project-content">
+                        <h3>Déploiement OS via PXE</h3>
+                        <p>Configuration d'un serveur pour l'installation automatisée de postes clients Windows via le réseau (PXE). Création et déploiement d'images système standardisées pour gagner du temps lors du renouvellement matériel.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">WDS / PXE</span>
+                            <span class="tech-tag">Déploiement</span>
+                            <span class="tech-tag">Windows</span>
+                            <span class="tech-tag">Automatisation</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/deploiement-pxe.pdf" class="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-users-cog"></i> 
+                    </div>
+                    <div class="project-content">
+                        <h3>Infrastructure Active Directory</h3>
+                        <p>Installation et administration d'un domaine Windows Server (Active Directory). Centralisation des identités, gestion des utilisateurs, des droits d'accès et application de stratégies de groupe (GPO) pour sécuriser les postes.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Windows Server</span>
+                            <span class="tech-tag">Active Directory</span>
+                            <span class="tech-tag">GPO</span>
+                            <span class="tech-tag">Identité</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="Fichiers/DOC-AD-DS.pdf" class="btn-download" target="_blank">
+                                <i class="fas fa-download"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="veille.html">Veille Technologique</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Awa C. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu hamburger pour mobile
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Fermer le menu en cliquant sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Animation au défilement pour la navbar
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Animation des cartes de projet au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observer les cartes de projet
+        document.querySelectorAll('.project-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
