@@ -11,7 +11,7 @@
         :root {
             --primary: #FF6B8B;
             --secondary: #6A5ACD;
-            --accent: #20B2AA;
+            --accent: #20B2AA; /* Couleur Turquoise */
             --neutral-light: #FDF6FA;
             --neutral-dark: #2D2B42;
             --neutral-medium: #8A7F9B;
@@ -36,74 +36,14 @@
 
         .container {
             max-width: 1200px;
-            margin: auto;
-            padding: 20px;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
+        <!-- TITRES MODIFIÉS -->
 
-        .project-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 25px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
+        <h3>BIC POWERX — MIX MARKETING</h3>
 
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
+        <h3>CAS AGENT DE VOYAGE — PLAN DE DÉCOUVERTE</h3>
 
-        .project-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
+        <h3>SAE COMMUNICATION — CRÉATION DE SUPPORTS</h3>
 
-        .project-card p {
-            color: var(--neutral-medium);
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="container">
-
-        <div class="projects-grid">
-
-            <!-- Projet 1 -->
-            <div class="project-card">
-                <h3>BIC POWERX — MIX MARKETING</h3>
-                <p>
-                    Projet de stratégie marketing et communication autour du produit BIC POWERX.
-                </p>
-            </div>
-
-            <!-- Projet 2 -->
-            <div class="project-card">
-                <h3>CAS AGENT DE VOYAGE — PLAN DE DÉCOUVERTE</h3>
-                <p>
-                    Création d’un plan de découverte et d’une analyse des besoins clients dans le domaine du voyage.
-                </p>
-            </div>
-
-            <!-- Projet 3 -->
-            <div class="project-card">
-                <h3>SAE COMMUNICATION — CRÉATION DE SUPPORTS</h3>
-                <p>
-                    Réalisation de supports de communication visuelle et digitale pour un projet SAE.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</body>
-</html>
 ```
