@@ -158,6 +158,8 @@
             transition: var(--transition);
             opacity: 0;
             transform: translateY(30px);
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
@@ -189,6 +191,9 @@
 
         .project-content {
             padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .project-content h3 {
@@ -201,6 +206,7 @@
             color: var(--neutral-medium);
             margin-bottom: 20px;
             line-height: 1.6;
+            flex-grow: 1;
         }
 
         .project-tech {
@@ -222,25 +228,27 @@
         .project-actions {
             display: flex;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: auto;
             flex-wrap: wrap;
         }
 
-        /* --- NOUVEAU STYLE BOUTONS TELECHARGEMENT --- */
+        /* --- STYLE BOUTONS TELECHARGEMENT --- */
         .btn-download {
             background: linear-gradient(135deg, var(--accent) 0%, #179b95 100%);
             color: white;
-            padding: 12px 25px;
+            padding: 12px 20px;
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
             box-shadow: 0 4px 15px rgba(32, 178, 170, 0.3);
             transition: all 0.3s ease;
             border: 2px solid transparent;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            flex: 1; /* Permet aux boutons de prendre la même largeur */
         }
 
         .btn-download:hover {
@@ -365,6 +373,7 @@
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
             .projects-container { grid-template-columns: 1fr; }
+            .project-actions { flex-direction: column; }
         }
     </style>
 </head>
@@ -373,15 +382,13 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <i class="fas fa-code"></i>
+                    <i class="fas fa-bullhorn"></i>
                     Mariame
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Accueil</a></li>
-                    <!-- <li><a href="parcours.html">Parcours</a></li> -->
                     <li><a href="projets.html" class="active">Projets</a></li>
                     <li><a href="compétences.html">Compétences</a></li>
-                    <!-- <li><a href="veille.html">Veille</a></li> -->
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -396,29 +403,28 @@
         <section id="projets">
             <div class="section-title">
                 <h2>Mes Projets</h2>
-                <p>Découvrez mes réalisations et compétences techniques</p>
+                <p>Découvrez mes réalisations en marketing, vente et communication</p>
             </div>
             
             <div class="projects-container">
                 
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-shopping-cart"></i> 
+                        <i class="fas fa-chart-pie"></i> 
                     </div>
                     <div class="project-content">
-                        <h3>Site E-commerce</h3>
-                        <p>Développement d'une application Web E-commerce : Conception et codage d'un site de vente en ligne dynamique. Création de la base de données relationnelle et développement back-end pour la gestion des produits et du panier.</p>
+                        <h3>BIC POWERX-MIX MARKETING</h3>
+                        <p>Création d'une innovation produit pour la marque BIC  à travers la constuction complète d'un mix marketing: produit, prix, distribution et communication. Travail autour du branding, du positionnement et de la stratégie commerciale.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">HTML/CSS</span>
-                            <span class="tech-tag">Développement Web</span>
+                            <span class="tech-tag">Marketing Mix</span>
+                            <span class="tech-tag">Stratégie</span>
+                            <span class="tech-tag">Analyse Marché</span>
+                            <span class="tech-tag">Positionnement</span>
                         </div>
                         <div class="project-actions">
                             <a href="Fichiers/DOC-presentation-revive_compressed.pdf" target="_blank" class="btn-download">
                                 <i class="fas fa-eye"></i> Documentation
                             </a>
-                            <!-- NOUVEAU BOUTON ORGANISATION ICI -->
                             <a href="Fichiers/organisation.zip" target="_blank" class="btn-download">
                                 <i class="fas fa-file-archive"></i> Organisation
                             </a>
@@ -428,150 +434,51 @@
 
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-shield-alt"></i> 
+                        <i class="fas fa-plane-departure"></i> 
                     </div>
                     <div class="project-content">
-                        <h3>Sécurisation HTTPS</h3>
-                        <p>Sécurisation des services web par la mise en place du protocole HTTPS. Création, déploiement et gestion de certificats SSL/TLS pour garantir le chiffrement et l'intégrité des échanges de données.</p>
+                        <h3>CAS AGENT DE VOYAGE-PLAN DE DECOUVERTE</h3>
+                        <p>Simulation commerciale centrée sur l'écoute client et l'analyse des besoins afin de construire une offre de voyage adaptée aux attentes du consomamateur.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">Sécurité</span>
-                            <span class="tech-tag">HTTPS</span>
-                            <span class="tech-tag">SSL/TLS</span>
-                            <span class="tech-tag">Certificats</span>
+                            <span class="tech-tag">Vente B2C</span>
+                            <span class="tech-tag">Plan de découverte</span>
+                            <span class="tech-tag">Négociation</span>
+                            <span class="tech-tag">Relation Client</span>
                         </div>
                         <div class="project-actions">
                              <a href="Fichiers/DOC-securisation-HTTPS.pdf" target="_blank" class="btn-download">
                                 <i class="fas fa-eye"></i> Documentation
                             </a>
+                            <a href="#" target="_blank" class="btn-download">
+                                <i class="fas fa-file-archive"></i> Organisation
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-network-wired"></i> 
+                        <i class="fas fa-paint-brush"></i> 
                     </div>
                     <div class="project-content">
-                        <h3>Haute Disponibilité & Load Balancing</h3>
-                        <p>Mise en place d'un Répartiteur de Charge. Configuration d'un cluster Web haute disponibilité avec Nginx. Distribution automatique du trafic entre plusieurs serveurs pour assurer la fluidité du service et la tolérance aux pannes.</p>
+                        <h3>SAR COMMUNICATION - CREATION DE SUPPORT</h3>
+                        <p>Comparaison entre un flyer réalisé sans intelligence artificiel et un flyer conçu avec IA afin d'analyser l'impact des oiutils numériques dans la création de supports de communication visuel.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">Loadbalancing</span>
-                            <span class="tech-tag">Haute Disponibilité</span>
-                            <span class="tech-tag">Nginx</span>
-                            <span class="tech-tag">Tolérance aux pannes</span>
+                            <span class="tech-tag">Communication</span>
+                            <span class="tech-tag">Création Visuelle</span>
+                            <span class="tech-tag">Design Graphique</span>
+                            <span class="tech-tag">Identité de marque</span>
                         </div>
                         <div class="project-actions">
                             <a href="Fichiers/reverse-proxy.pdf" target="_blank" class="btn-download">
                                 <i class="fas fa-eye"></i> Documentation
                             </a>
-                        </div>
-                    </div>
-                </div> 
-
-                <!-- <div class="project-card">
-                     <div class="project-img">
-                        <i class="fas fa-chart-area"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Supervision Zabbix</h3>
-                        <p>Déploiement d'un serveur de monitoring centralisé pour surveiller l'état de santé du parc informatique (Serveurs & Réseaux). Configuration d'alertes en temps réel et création de tableaux de bord pour garantir la continuité de service.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Supervision</span>
-                            <span class="tech-tag">Linux</span>
-                            <span class="tech-tag">SNMP</span>
-                            <span class="tech-tag">Métrologie</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="Fichiers/DOC-Installation-Zabbix.pdf" target="_blank" class="btn-download">
-                                <i class="fas fa-eye"></i> Documentation
+                            <a href="#" target="_blank" class="btn-download">
+                                <i class="fas fa-file-archive"></i> Organisation
                             </a>
                         </div>
                     </div>
                 </div> 
-
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-project-diagram"></i> 
-                    </div>
-                    <div class="project-content">
-                        <h3>Segmentation par VLAN</h3>
-                        <p>Conception et configuration d'une architecture réseau segmentée par VLANs sur des commutateurs administrables. Isolement des flux (VoIP, Data, Administration) pour optimiser les performances et sécuriser l'infrastructure locale.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Réseau</span>
-                            <span class="tech-tag">VLAN</span>
-                            <span class="tech-tag">Switching</span>
-                            <span class="tech-tag">Sécurité Interne</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="DOC-Segmentation-Vlan.pdf" target="_blank" class="btn-download">
-                                <i class="fas fa-eye"></i> Documentation
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-img">
-                         <i class="fas fa-ticket-alt"></i>
-                     </div> 
-                    <div class="project-content">
-                        <h3>Gestion de Parc (GLPI)</h3>
-                        <p>Mise en place d'une solution GLPI. Déploiement d'un outil centralisé pour la gestion du parc informatique et le suivi des incidents (Ticketing). Automatisation de l'inventaire matériel et logiciel via OCS Inventory.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">GLPI</span>
-                            <span class="tech-tag">Ticketing</span>
-                            <span class="tech-tag">Helpdesk</span>
-                            <span class="tech-tag">OCS Inventory</span> 
-                        </div>
-                        <div class="project-actions">
-                            <a href="Fichiers/DOC-INSTALLATION-GLPI.pdf" target="_blank" class="btn-download">
-                                <i class="fas fa-eye"></i> Documentation
-                            </a>
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-desktop"></i> 
-                    </div>
-                    <div class="project-content">
-                        <h3>Déploiement OS via PXE</h3>
-                        <p>Configuration d'un serveur pour l'installation automatisée de postes clients Windows via le réseau (PXE). Création et déploiement d'images système standardisées pour gagner du temps lors du renouvellement matériel.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">WDS / PXE</span>
-                            <span class="tech-tag">Déploiement</span>
-                            <span class="tech-tag">Windows</span>
-                            <span class="tech-tag">Automatisation</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="Fichiers/DOC-PXE.pdf" target="_blank" class="btn-download">
-                                <i class="fas fa-eye"></i> Documentation
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-users-cog"></i> 
-                    </div>
-                    <div class="project-content">
-                        <h3>Infrastructure Active Directory</h3>
-                        <p>Installation et administration d'un domaine Windows Server (Active Directory). Centralisation des identités, gestion des utilisateurs, des droits d'accès et application de stratégies de groupe (GPO) pour sécuriser les postes.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Windows Server</span>
-                            <span class="tech-tag">Active Directory</span>
-                            <span class="tech-tag">GPO</span>
-                            <span class="tech-tag">Identité</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="Fichiers/DOC-AD-DS.pdf" target="_blank" class="btn-download">
-                                <i class="fas fa-eye"></i> Documentation
-                            </a>
-                        </div>
-                    </div>
-                </div> -->
 
             </div>
         </section>
@@ -584,10 +491,8 @@
                     <h3>Navigation</h3>
                     <ul class="footer-links">
                         <li><a href="index.html">Accueil</a></li>
-                        <!-- <li><a href="parcours.html">Parcours</a></li> -->
                         <li><a href="projets.html">Projets</a></li>
                         <li><a href="competences.html">Compétences</a></li>
-                        <!-- <li><a href="veille.html">Veille Technologique</a></li> -->
                     </ul>
                 </div>
                 <div class="footer-section">
